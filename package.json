@@ -1,0 +1,36 @@
+{
+  "name": "@unicef-polymer/etools-table",
+  "description": "Etools table",
+  "version": "1.0.0-rc.1",
+  "homepage": "https://github.com/unicef-polymer/etools-table",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unicef-polymer/etools-table.git"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@polymer/iron-icons": "^3.0.1",
+    "@polymer/paper-checkbox": "^3.1.0",
+    "@polymer/paper-icon-button": "^3.0.1",
+    "@polymer/polymer": "^3.1.0",
+    "lit-element": "^2.2.1",
+    "lodash-es": "^4.17.11",
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "eslint": "^6.5.0",
+    "eslint-config-google": "^0.13.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-lit": "^1.2.0",
+    "wct-browser-legacy": "^1.0.2"
+  },
+  "scripts": {
+    "lint": "npm run lint:javascript && polymer lint && exit 0",
+    "lint:javascript": "eslint . --ext js,html && exit 0"
+  },
+  "main": "etools-table.js",
+  "publishConfig": {
+    "access": "public"
+  }
+}
