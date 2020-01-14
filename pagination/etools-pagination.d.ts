@@ -31,6 +31,8 @@ export const defaultPaginator: {
   visible_range: []
 };
 
+declare function getPaginator(currentPaginator: EtoolsPaginator, data: any): EtoolsPaginator;
+
 declare global {
 
   interface HTMLElementTagNameMap {
