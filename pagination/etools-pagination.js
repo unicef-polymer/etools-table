@@ -46,14 +46,20 @@ const computeVisibleRange = (paginator) => {
   return [start, end];
 }
 
-export const getPaginator = (currentPaginator, data) => {
-  // init paginator
-  const paginator = Object.assign({}, currentPaginator);
+export const setPaginator = (paginator, data) => {
   paginator.count = updatePaginatorTotalResults(data);
   paginator.total_pages = computeTotalPages(paginator.page_size, paginator.count);
   paginator.visible_range = computeVisibleRange(paginator);
-  return paginator;
-}
+};
+
+export const getPagedData = (currentPaginator, data) => {
+  try {
+    return data.slice(currentPaginator.visible_range[0] - 1, currentPaginator.visible_range[1]);
+  } catch (err) {
+    console.log(err);
+  }
+  return [];
+};
 
 // #endregion
 

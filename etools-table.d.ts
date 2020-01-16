@@ -1,18 +1,5 @@
 import {customElement, LitElement, html, property, TemplateResult} from 'lit-element/lit-element.js';
 
-export enum EtoolsTableColumnType {
-  Text,
-  Date,
-  Link,
-  Number,
-  Checkbox,
-  Custom
-}
-
-export enum EtoolsTableColumnSort {
-  Asc = 'asc',
-  Desc = 'desc'
-}
 
 export interface EtoolsTableColumn {
   label: string; // column header label
@@ -29,6 +16,25 @@ export interface EtoolsTableColumn {
   capitalize?: boolean;
   placeholder?: string;
   customMethod?: Function;
+}
+
+export interface EtoolsTableChildRow {
+  rowHTML: TemplateResult;
+  showExpanded: boolean;
+}
+
+export enum EtoolsTableColumnType {
+  Text,
+  Date,
+  Link,
+  Number,
+  Checkbox,
+  Custom
+}
+
+export enum EtoolsTableColumnSort {
+  Asc = 'asc',
+  Desc = 'desc'
 }
 
 export enum EtoolsTableActionType {

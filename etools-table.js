@@ -10,20 +10,6 @@ import {prettyDate} from './utils/date-utility.js';
 import './pagination/etools-pagination.js';
 import get from 'lodash-es/get';
 
-export const EtoolsTableColumnType = {
-  Text: 'Text',
-  Date: 'Date',
-  Link: 'Link',
-  Number: 'Number',
-  Checkbox: 'Checkbox',
-  Custom: 'Custom'
-}
-
-export const EtoolsTableColumnSort = {
-  Asc: 'asc',
-  Desc: 'desc'
-}
-
 export const EtoolsTableColumn = {
   label: 'label', // column header label
   name: 'name', // property name from item object
@@ -39,6 +25,25 @@ export const EtoolsTableColumn = {
   capitalize: 'capitalize',
   placeholder: 'placeholder',
   customMethod: 'customMethod'
+}
+
+export const EtoolsTableChildRow = {
+  rowHTML,
+  showExpanded
+}
+
+export const EtoolsTableColumnType = {
+  Text: 'Text',
+  Date: 'Date',
+  Link: 'Link',
+  Number: 'Number',
+  Checkbox: 'Checkbox',
+  Custom: 'Custom'
+}
+
+export const EtoolsTableColumnSort = {
+  Asc: 'asc',
+  Desc: 'desc'
 }
 
 export const EtoolsTableActionType = {
@@ -65,6 +70,9 @@ class EtoolsTable extends LitElement {
       items: {type: Array},
       paginator: {type: Object},
       defaultPlaceholder: {type: String},
+      getChildRowTemplateMethod: {type: Function},
+      offline: {type: Boolean},
+      showChildRows: {type: Boolean},
     };
   }
 
@@ -82,6 +90,8 @@ class EtoolsTable extends LitElement {
   }
 
   render() {
+    this.showChildRows = !!this.getChildRowTemplateMethod;
+
     return html`
       <style>
         /*
@@ -96,12 +106,13 @@ class EtoolsTable extends LitElement {
         <caption ?hidden="${this.showCaption(this.caption)}">${this.caption}</caption>
         <thead>
           <tr>
+            ${this.showChildRows ? html`<th class='expand-cell'></th>` : ''}
             ${this.columns.map(column => this.getColumnHtml(column))}
             ${this.showRowActions() ? html`<th></th>` : ''}
           </tr>
         </thead>
         <tbody>
-          ${this.items.map(item => this.getRowDataHtml(item, this.showEdit))}
+          ${this.items.map(item => this.getRowDataHtml(item, this.showEdit, this.offline))}
           ${this.paginator ? this.paginationHtml : ''}
         </tbody>
       </table>
@@ -146,16 +157,31 @@ class EtoolsTable extends LitElement {
       : html`<a class="" href="${aHref}">${item[key]}</a>`;
   }
 
-  getRowDataHtml(item, showEdit) {
-    const columnsKeys = this.getColumnsKeys();
+  getRowDataHtml(item, showEdit, offline) {
+    let childRow;
+    if (this.showChildRows) {
+      childRow = this.getChildRowTemplate(item);
+    }
     return html`
-      <tr>
-        ${columnsKeys.map(k => html`<td data-label="${this.getColumnDetails(k).label}" class="${this.getRowDataColumnClassList(k)}">
-          ${this.getItemValue(item, k, showEdit)}</td>`)}
+    <tr>
+      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow!.showExpanded)}"></iron-icon></td>` : ''}
+      ${this.columns.map((col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}">
+        ${this.getItemValue(item, col, showEdit, offline)}</td>`)}
 
-        ${this.showRowActions() ? html`<td data-label="${this.actionsLabel}" class="row-actions">&nbsp;${this.getRowActionsTmpl(item)}` : ''}
-      </tr>
+      ${this.showRowActions() ? html`<td data-label="${this.actionsLabel}" class="row-actions">&nbsp;${this.getRowActionsTmpl(item)}` : ''}
+    </tr>
+    ${childRow !== undefined ? childRow.rowHTML : ''}
+  `;
+  }
+
+  getChildRowTemplate(item) {
+    let childRow = this.getChildRowTemplateMethod(item);
+    childRow.rowHTML = html`
+    <tr class="child-row${childRow.showExpanded ? '' : ' display-none'}">
+      ${childRow.rowHTML}
+    </tr>
     `;
+    return childRow;
   }
 
   getRowActionsTmpl(item) {
@@ -172,9 +198,10 @@ class EtoolsTable extends LitElement {
   }
 
   get paginationHtml() {
+    let extraColsNo = this.showChildRows ? (this.showRowActions ? 2 : 1) : (this.showRowActions ? 1 : 0);
     return html`
     <tr>
-      <td class="pagination" colspan="${this.columns.length + (this.showRowActions() ? 1 : 0)}">
+      <td class="pagination" colspan="${this.columns.length + extraColsNo}">
         <etools-pagination .paginator="${this.paginator}"></etools-pagination>
       </td>
     </tr>`;
@@ -207,6 +234,18 @@ class EtoolsTable extends LitElement {
     return sort === EtoolsTableColumnSort.Asc ? 'arrow-upward' : 'arrow-downward';
   }
 
+  getExpandIcon(expanded) {
+    return expanded === true ? 'expand-less' : 'expand-more';
+  }
+
+  toggleChildRow(ev) {
+    let nextRow = ev.target.closest('tr').nextElementSibling;
+    if (nextRow) {
+      nextRow.classList.toggle("display-none");
+    }
+    toggleAttributeValue(ev.target, 'icon', 'expand-less', 'expand-more');
+  }
+
   getColumnDetails(name) {
     const column = this.columns.find(c => c.name === name);
     if (!column) {
@@ -231,7 +270,7 @@ class EtoolsTable extends LitElement {
     return this.columns.map(c => c.name);
   }
 
-  getItemValue(item, key, showEdit) {
+  getItemValue(item, key, showEdit, offline) {
     // get column object to determine how data should be displayed (date, string, link, number...)
     const column = this.getColumnDetails(key);
     switch (column.type) {
@@ -246,7 +285,7 @@ class EtoolsTable extends LitElement {
         return this._getCheckbox(item, key, showEdit);
       case EtoolsTableColumnType.Custom:
         return column.customMethod
-          ? column.customMethod(item, key)
+          ? column.customMethod(item, key, offline)
           : this._getValueByKey(item, key, column.placeholder);
       default:
         return this._getValueByKey(item, key, column.placeholder);
