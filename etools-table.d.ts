@@ -57,6 +57,8 @@ declare class EtoolsTable extends LitElement {
   items: any[] | null | undefined;
   paginator: object | null | undefined;
   defaultPlaceholder: string | null | undefined;
+  getChildRowTemplateMethod: Function | null | undefined;
+  customData: object | null | undefined;
 }
 
 declare global {

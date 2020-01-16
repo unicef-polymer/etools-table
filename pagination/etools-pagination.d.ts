@@ -22,7 +22,7 @@ export const defaultPaginator: {
   total_pages: 0,
   count: 0,
   visible_range: []
-};
+}
 
 declare function setPaginator(currentPaginator: EtoolsPaginator, data: any[]);
 declare function getPagedData(currentPaginator: EtoolsPaginator, data: any[]): any[];

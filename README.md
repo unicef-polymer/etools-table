@@ -73,6 +73,8 @@ LitElement based data table UI
    `columns` | array of `EtoolsTableColumn`, see below the properties
    `items` | array of objects to be used for populating the table
    `paginator` | of type `EtoolsPaginator`, not required, will fire event `paginator-change`
+   `getChildRowTemplate` | of type Function, if specified, will be called for each row with data item as param and the result will be displayed below normal row
+   `customData` | a convenient way to pass data from the page to the Column `customMethod`, this object will be the third param after data item and column key
 
 ## EtoolsTableColumn
 

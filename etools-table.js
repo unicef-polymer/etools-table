@@ -71,7 +71,7 @@ class EtoolsTable extends LitElement {
       paginator: {type: Object},
       defaultPlaceholder: {type: String},
       getChildRowTemplateMethod: {type: Function},
-      offline: {type: Boolean},
+      customData: {type: Object},
       showChildRows: {type: Boolean},
     };
   }
@@ -112,7 +112,7 @@ class EtoolsTable extends LitElement {
           </tr>
         </thead>
         <tbody>
-          ${this.items.map(item => this.getRowDataHtml(item, this.showEdit, this.offline))}
+          ${this.items.map(item => this.getRowDataHtml(item, this.showEdit, this.customData))}
           ${this.paginator ? this.paginationHtml : ''}
         </tbody>
       </table>
@@ -157,16 +157,16 @@ class EtoolsTable extends LitElement {
       : html`<a class="" href="${aHref}">${item[key]}</a>`;
   }
 
-  getRowDataHtml(item, showEdit, offline) {
+  getRowDataHtml(item, showEdit, customData) {
     let childRow;
     if (this.showChildRows) {
       childRow = this.getChildRowTemplate(item);
     }
     return html`
     <tr>
-      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow!.showExpanded)}"></iron-icon></td>` : ''}
+      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}"></iron-icon></td>` : ''}
       ${this.columns.map((col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}">
-        ${this.getItemValue(item, col, showEdit, offline)}</td>`)}
+        ${this.getItemValue(item, col, showEdit, customData)}</td>`)}
 
       ${this.showRowActions() ? html`<td data-label="${this.actionsLabel}" class="row-actions">&nbsp;${this.getRowActionsTmpl(item)}` : ''}
     </tr>
@@ -175,7 +175,13 @@ class EtoolsTable extends LitElement {
   }
 
   getChildRowTemplate(item) {
-    let childRow = this.getChildRowTemplateMethod(item);
+    let childRow;
+    try {
+      childRow = this.getChildRowTemplateMethod(item) || {};
+    } catch (err) {
+      console.log(err);
+      childRow = {};
+    }
     childRow.rowHTML = html`
     <tr class="child-row${childRow.showExpanded ? '' : ' display-none'}">
       ${childRow.rowHTML}
@@ -270,7 +276,7 @@ class EtoolsTable extends LitElement {
     return this.columns.map(c => c.name);
   }
 
-  getItemValue(item, key, showEdit, offline) {
+  getItemValue(item, key, showEdit, customData) {
     // get column object to determine how data should be displayed (date, string, link, number...)
     const column = this.getColumnDetails(key);
     switch (column.type) {
@@ -285,7 +291,7 @@ class EtoolsTable extends LitElement {
         return this._getCheckbox(item, key, showEdit);
       case EtoolsTableColumnType.Custom:
         return column.customMethod
-          ? column.customMethod(item, key, offline)
+          ? column.customMethod(item, key, customData)
           : this._getValueByKey(item, key, column.placeholder);
       default:
         return this._getValueByKey(item, key, column.placeholder);
