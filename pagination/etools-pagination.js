@@ -4,7 +4,7 @@ import '@polymer/paper-item/paper-item.js';
 
 import {customElement, LitElement, html, property} from 'lit-element/lit-element.js';
 import {etoolsPaginationStyles} from './etools-pagination-style.js';
-import {fireEvent} from '../utils/fire-custom-event.js';
+import {fireEvent} from '../utils/utils';
 
 // #region Paginator methods
 export const defaultPaginator = {
@@ -16,8 +16,8 @@ export const defaultPaginator = {
 }
 
 const updatePaginatorTotalResults = (data) => {
-  if (data && data.count) {
-    const count = parseInt(data.count, 10);
+  if (data && data.length) {
+    const count = data.length;
     if (!isNaN(count)) {
       return count;
     }

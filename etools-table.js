@@ -1,11 +1,12 @@
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/paper-checkbox/paper-checkbox.js';
-import {customElement, LitElement, html, property} from 'lit-element/lit-element.js';
+import {customElement, LitElement, html, property, css} from 'lit-element/lit-element.js';
 
 import {etoolsTableStyles} from './styles/etools-table-styles.js';
 import {etoolsTableResponsiveStyles} from './styles/etools-table-responsive-styles.js';
-import {fireEvent} from './utils/fire-custom-event.js';
+import {gridLayoutStylesLit} from './styles/grid-layout-styles.js';
+import {fireEvent, toggleAttributeValue} from './utils/utils.js';
 import {prettyDate} from './utils/date-utility.js';
 import './pagination/etools-pagination.js';
 import get from 'lodash-es/get';
@@ -24,12 +25,13 @@ export const EtoolsTableColumn = {
   isExternalLink: 'isExternalLink',
   capitalize: 'capitalize',
   placeholder: 'placeholder',
-  customMethod: 'customMethod'
+  customMethod: 'customMethod',
+  sortMethod: 'sortMethod'
 }
 
 export const EtoolsTableChildRow = {
-  rowHTML,
-  showExpanded
+  rowHTML: '',
+  showExpanded: false
 }
 
 export const EtoolsTableColumnType = {
@@ -55,7 +57,7 @@ export const EtoolsTableActionType = {
 class EtoolsTable extends LitElement {
 
   static get styles() {
-    return [etoolsTableResponsiveStyles, etoolsTableStyles];
+    return [etoolsTableResponsiveStyles, etoolsTableStyles, gridLayoutStylesLit];
   }
 
   static get properties() {
@@ -73,6 +75,7 @@ class EtoolsTable extends LitElement {
       getChildRowTemplateMethod: {type: Function},
       customData: {type: Object},
       showChildRows: {type: Boolean},
+      extraCSS: {type: Object}
     };
   }
 
@@ -87,13 +90,14 @@ class EtoolsTable extends LitElement {
     this.actionsLabel = 'Actions';
     this.caption = '';
     this.defaultPlaceholder = '-';
+    this.extraCSS = css``;
   }
 
   render() {
     this.showChildRows = !!this.getChildRowTemplateMethod;
-
     return html`
       <style>
+        ${this.extraCSS}
         /*
          * Do not use transparent colors here, it will make the chk border darker.
          * rgba(117, 117, 117) is the equivalent of --secondary-text-color
@@ -261,8 +265,7 @@ class EtoolsTable extends LitElement {
   }
 
   // Rows
-  getRowDataColumnClassList(key) {
-    const column = this.getColumnDetails(key);
+  getRowDataColumnClassList(column) {
     const cssClass = column.capitalize ? 'capitalize ' : '';
     switch (column.type) {
       case EtoolsTableColumnType.Number:
@@ -276,9 +279,9 @@ class EtoolsTable extends LitElement {
     return this.columns.map(c => c.name);
   }
 
-  getItemValue(item, key, showEdit, customData) {
+  getItemValue(item, column, showEdit, customData) {
     // get column object to determine how data should be displayed (date, string, link, number...)
-    const column = this.getColumnDetails(key);
+    const key = column.name;
     switch (column.type) {
       case EtoolsTableColumnType.Date:
         return item[key]

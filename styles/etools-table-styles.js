@@ -133,4 +133,50 @@ export const etoolsTableStyles = css`
     paper-checkbox[readonly] {
       pointer-events: none;
     }
+
+    .expand-cell {
+      padding-left: 5px !important;
+      padding-right: 5px !important;
+      width: 20px;
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+
+    .child-row, .child-row td {
+      background-color: #F5F5F5;
+    }
+
+    .child-row .child-row-inner-container {
+      min-height: var(--child-row-inner-container-height);
+    }
+
+    .child-row .child-item {
+      background-color: var(--child-item-background);
+      border: var(--child-item-border);
+      padding: var(--child-item-padding);
+      margin: var(--child-item-margin);
+      cursor: var(--child-item-cursor);
+      line-height: var(--child-item-line-height);
+      float: var(--child-item-float);
+      white-space: var(--child-item-white-space);
+    }
+
+    .display-none {
+      display: none;
+    }
+
+    paper-icon-button.icon-add {
+      float: right;
+      padding: 0px;
+      width: 25px;
+      height: 25px;
+      color: var(--primary-color);
+    }
+
+    @media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+      paper-icon-button.icon-add {
+        float: left;
+      }
+    }
 `;

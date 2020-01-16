@@ -1,4 +1,4 @@
-import {customElement, LitElement, html, property, TemplateResult} from 'lit-element/lit-element.js';
+import {customElement, LitElement, html, css, property, TemplateResult} from 'lit-element/lit-element.js';
 
 
 export interface EtoolsTableColumn {
@@ -16,6 +16,7 @@ export interface EtoolsTableColumn {
   capitalize?: boolean;
   placeholder?: string;
   customMethod?: Function;
+  sortMethod?(data: any[], ascending: boolean): void;
 }
 
 export interface EtoolsTableChildRow {
@@ -59,6 +60,7 @@ declare class EtoolsTable extends LitElement {
   defaultPlaceholder: string | null | undefined;
   getChildRowTemplateMethod: Function | null | undefined;
   customData: object | null | undefined;
+  extraCSS: CSS | null | undefined;
 }
 
 declare global {
