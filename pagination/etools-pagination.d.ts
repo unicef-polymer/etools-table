@@ -6,13 +6,6 @@ import {customElement, LitElement, html, property, TemplateResult} from 'lit-ele
 declare class EtoolsPagination extends LitElement {
   paginator: object | null | undefined;
   pageSizeOptions: any[] | null | undefined;
-
-  goToFirstPage(): void;
-  goToLastPage(): void;
-  pageLeft(): void;
-  pageRight(): void;
-  onPageSizeChanged(e: any): void;
-  firePaginatorChangeEvent(paginatorData: any): void;
 }
 
 export interface EtoolsPaginator {

@@ -51,28 +51,6 @@ declare class EtoolsTable extends LitElement {
   items: any[] | null | undefined;
   paginator: object | null | undefined;
   defaultPlaceholder: string | null | undefined;
-
-  getColumnHtml(column: EtoolsTableColumn): TemplateResult;
-  getColumnHtmlWithSort(column: EtoolsTableColumn): TemplateResult;
-  getLinkTmpl(pathTmpl: string | undefined, item: any, key: string, isExternalLink?: boolean): TemplateResult;
-  getRowDataHtml(item: any, showEdit: boolean): TemplateResult;
-  getRowActionsTmpl(item: any): TemplateResult;
-  get paginationHtml(): TemplateResult;
-  showCaption(caption: string): boolean;
-  getColumnClassList(column: EtoolsTableColumn): string;
-  columnHasSort(sort: EtoolsTableColumnSort | undefined): boolean;
-  getSortIcon(sort: EtoolsTableColumnSort): string;
-  getColumnDetails(name: string): EtoolsTableColumn;
-  getRowDataColumnClassList(key: string): string;
-  getColumnsKeys(): string[];
-  getItemValue(item: any, key: string, showEdit: boolean): any;
-  _getCheckbox(item: any, key: string, showEdit: boolean): TemplateResult;
-  _getValueByKey(item: any, key: string, placeholder?: string, ignorePlaceholder: boolean = false): any;
-  showRowActions(): boolean;
-  triggerAction(type: EtoolsTableActionType, item: any): void;
-  toggleAndSortBy(column: EtoolsTableColumn): void;
-  toggleColumnSort(sort: EtoolsTableColumnSort): EtoolsTableColumnSort;
-  triggerItemChanged(item: any, field: string, filedValue: any): void;
 }
 
 declare global {
