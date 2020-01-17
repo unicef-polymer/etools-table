@@ -24,7 +24,8 @@ export const defaultPaginator: {
   visible_range: []
 }
 
-declare function setPaginator(currentPaginator: EtoolsPaginator, data: any[]);
+declare function setPaginator(currentPaginator: EtoolsPaginator, data: any[]): void;
+declare function getPaginatorWithBackend(currentPaginator: EtoolsPaginator, count: any): EtoolsPaginator;
 declare function getPagedData(currentPaginator: EtoolsPaginator, data: any[]): any[];
 
 declare global {

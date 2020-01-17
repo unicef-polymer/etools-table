@@ -15,16 +15,6 @@ export const defaultPaginator = {
   visible_range: []
 }
 
-const updatePaginatorTotalResults = (data) => {
-  if (data && data.length) {
-    const count = data.length;
-    if (!isNaN(count)) {
-      return count;
-    }
-  }
-  return 0;
-}
-
 const computeTotalPages = (pageSize, totalResults) => {
   return (pageSize < totalResults) ? Math.ceil(totalResults / pageSize) : 1;
 }
@@ -47,9 +37,21 @@ const computeVisibleRange = (paginator) => {
 }
 
 export const setPaginator = (paginator, data) => {
-  paginator.count = updatePaginatorTotalResults(data);
+  paginator.count = Array.isArray(data) ? data.length : 0;
   paginator.total_pages = computeTotalPages(paginator.page_size, paginator.count);
   paginator.visible_range = computeVisibleRange(paginator);
+};
+
+export const getPaginatorWithBackend = (currentPaginator, count) => {
+  count = parseInt(count, 10);
+  if (isNaN(count)) {
+    count = 0;
+  }
+  const paginator = Object.assign({}, currentPaginator);
+  paginator.count = count;
+  paginator.total_pages = computeTotalPages(paginator.page_size, paginator.count);
+  paginator.visible_range = computeVisibleRange(paginator);
+  return paginator;
 };
 
 export const getPagedData = (currentPaginator, data) => {

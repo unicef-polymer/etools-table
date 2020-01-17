@@ -44,7 +44,8 @@ export const etoolsTableResponsiveStyles = css`
       content: "";
     }
     tr {
-      border: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
     }
     td {
       border: none !important;
