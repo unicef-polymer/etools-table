@@ -1,0 +1,70 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:lit/recommended",
+    "google",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": [
+    "html",
+    "lit"
+  ],
+  "rules": {
+    "linebreak-style": "off",
+    "padded-blocks": "off",
+    "brace-style": "off",
+    "new-cap": [
+      "error",
+      {
+        "capIsNewExceptions": [
+          "Polymer",
+          "GestureEventListeners"
+        ],
+        "capIsNewExceptionPattern": "^Etools..|..Mixin$"
+      }
+    ],
+    "no-var": "off",
+    "require-jsdoc": "off",
+    "valid-jsdoc": "off",
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
+    "camelcase": "off",
+    "arrow-parens": [
+      2,
+      "as-needed",
+      {
+        "requireForBlockBody": true
+      }
+    ],
+    "indent": "off",
+    "lit/attribute-value-entities": "off",
+    "lit/no-legacy-template-syntax": "off"
+  },
+  "globals": {
+    "moment": true,
+    "Promise": true,
+    "Polymer": true,
+    "EtoolsPmpApp": true,
+    "EtoolsRequestCacheDb": true,
+    "ShadyCSS": true,
+    "Set": true
+  }
+}
