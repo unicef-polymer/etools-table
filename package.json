@@ -34,6 +34,7 @@
     "lint:javascript": "eslint . --ext js,html && exit 0"
   },
   "main": "etools-table.js",
+  "module": "etools-table.js",
   "publishConfig": {
     "access": "public"
   }
