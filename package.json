@@ -3,6 +3,8 @@
   "description": "Etools table",
   "version": "1.0.2",
   "homepage": "https://github.com/unicef-polymer/etools-table",
+  "main": "etools-table.js",
+  "module": "etools-table.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/unicef-polymer/etools-table.git"
@@ -33,8 +35,6 @@
     "lint": "npm run lint:javascript && polymer lint && exit 0",
     "lint:javascript": "eslint . --ext js,html && exit 0"
   },
-  "main": "etools-table.js",
-  "module": "etools-table.js",
   "publishConfig": {
     "access": "public"
   }
