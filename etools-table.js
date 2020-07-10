@@ -75,7 +75,8 @@ class EtoolsTable extends LitElement {
       getChildRowTemplateMethod: {type: Function},
       customData: {type: Object},
       showChildRows: {type: Boolean},
-      extraCSS: {type: Object}
+      extraCSS: {type: Object},
+      singleSort: {type: Boolean, value: false}
     };
   }
 
@@ -91,6 +92,7 @@ class EtoolsTable extends LitElement {
     this.caption = '';
     this.defaultPlaceholder = '-';
     this.extraCSS = css``;
+    this.singleSort = false;
   }
 
   render() {
@@ -124,7 +126,7 @@ class EtoolsTable extends LitElement {
   }
 
   getColumnHtml(column) {
-    if (!this.columnHasSort(column.sort)) {
+    if (!column.hasOwnProperty('sort')) {
       return html`
         <th class="${this.getColumnClassList(column)}">${column.label}</th>
       `;
@@ -229,7 +231,7 @@ class EtoolsTable extends LitElement {
       classList.push('right-align');
     }
 
-    if (this.columnHasSort(column.sort)) {
+    if (column.hasOwnProperty('sort')) {
       classList.push('sort');
     }
 
@@ -346,6 +348,13 @@ class EtoolsTable extends LitElement {
       return;
     }
     column.sort = this.toggleColumnSort(column.sort);
+    if (this.singleSort) {
+      this.columns.forEach((columnData) => {
+        if (columnData.hasOwnProperty('sort') && columnData.name !== column.name) {
+          columnData.sort = null
+        }
+      })
+    }
     fireEvent(this, 'sort-change', [...this.columns]);
   }
 
