@@ -5,7 +5,7 @@ export interface EtoolsTableColumn {
   label: string; // column header label
   name: string; // property name from item object
   type: EtoolsTableColumnType;
-  sort?: EtoolsTableColumnSort;
+  sort?: EtoolsTableColumnSort | null;
   /**
    * used only for EtoolsTableColumnType.Link to specify url template (route with a single param)
    * ex: `${ROOT_PATH}assessments/:id/details`
@@ -61,6 +61,7 @@ declare class EtoolsTable extends LitElement {
   getChildRowTemplateMethod: Function | null | undefined;
   customData: object | null | undefined;
   extraCSS: CSS | null | undefined;
+  singleSort: boolean | undefined;
 }
 
 declare global {
