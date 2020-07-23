@@ -236,7 +236,9 @@ class EtoolsTable extends LitElement {
       classList.push('sort');
     }
 
-    classList.push(column.cssClass);
+    if(column.cssClass){
+      classList.push(column.cssClass);
+    }
 
     return classList.join(' ');
   }
