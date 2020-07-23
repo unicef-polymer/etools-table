@@ -35,7 +35,7 @@ export const etoolsTableStyles = css`
       font-size: var(--etools-table-col-header-font-size, 12px);
     }
 
-    table td.right-align, table th.right-align {
+    table td.align-right, table th.align-right {
       text-align: right;
     }
 

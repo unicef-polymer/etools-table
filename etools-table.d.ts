@@ -16,6 +16,7 @@ export interface EtoolsTableColumn {
   capitalize?: boolean;
   placeholder?: string;
   customMethod?: Function;
+  cssClass?: string;
   sortMethod?(data: any[], ascending: boolean): void;
 }
 
