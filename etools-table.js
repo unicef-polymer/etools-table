@@ -273,10 +273,14 @@ class EtoolsTable extends LitElement {
 
   // Rows
   getRowDataColumnClassList(column) {
-    const cssClass = column.capitalize ? 'capitalize ' : '';
+    let cssClass = column.cssClass ? column.cssClass : '';
+    if (column.capitalize) {
+      cssClass = `${cssClass} capitalize`;
+    }
+
     switch (column.type) {
       case EtoolsTableColumnType.Number:
-        return `${cssClass}align-right`;
+        return `${cssClass} align-right`;
       default:
         return cssClass;
     }
