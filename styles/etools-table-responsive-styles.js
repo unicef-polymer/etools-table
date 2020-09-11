@@ -36,6 +36,7 @@ export const etoolsTableResponsiveStyles = css`
     }
     table td, table th {
       display: block !important;
+      text-align: left !important;
     }
     table tr td.pagination {
       padding: 0px 8px !important;
