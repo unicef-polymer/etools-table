@@ -26,7 +26,8 @@ export const EtoolsTableColumn = {
   capitalize: 'capitalize',
   placeholder: 'placeholder',
   customMethod: 'customMethod',
-  sortMethod: 'sortMethod'
+  sortMethod: 'sortMethod',
+  cssClass: ''
 }
 
 export const EtoolsTableChildRow = {
@@ -228,11 +229,15 @@ class EtoolsTable extends LitElement {
     const classList = [];
 
     if (column.type === EtoolsTableColumnType.Number) {
-      classList.push('right-align');
+      classList.push('align-right');
     }
 
     if (column.hasOwnProperty('sort')) {
       classList.push('sort');
+    }
+
+    if(column.cssClass){
+      classList.push(column.cssClass);
     }
 
     return classList.join(' ');
@@ -268,10 +273,14 @@ class EtoolsTable extends LitElement {
 
   // Rows
   getRowDataColumnClassList(column) {
-    const cssClass = column.capitalize ? 'capitalize ' : '';
+    let cssClass = column.cssClass ? column.cssClass : '';
+    if (column.capitalize) {
+      cssClass = `${cssClass} capitalize`;
+    }
+
     switch (column.type) {
       case EtoolsTableColumnType.Number:
-        return `${cssClass}right-align`;
+        return `${cssClass} align-right`;
       default:
         return cssClass;
     }
@@ -291,7 +300,6 @@ class EtoolsTable extends LitElement {
           : (column.placeholder ? column.placeholder : this.defaultPlaceholder);
       case EtoolsTableColumnType.Link:
         return this.getLinkTmpl(column.link_tmpl, item, key, column.isExternalLink);
-      case EtoolsTableColumnType.Number:
       case EtoolsTableColumnType.Checkbox:
         return this._getCheckbox(item, key, showEdit);
       case EtoolsTableColumnType.Custom:
