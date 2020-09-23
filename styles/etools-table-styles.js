@@ -138,7 +138,7 @@ export const etoolsTableStyles = css`
       padding-left: 5px !important;
       padding-right: 5px !important;
       width: 20px;
-      color: var(--expand-cell-color, #000000);
+      color: var(--expand-cell-color, --primary-color);
       cursor: pointer;
     }
 

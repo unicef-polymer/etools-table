@@ -100,6 +100,11 @@ LitElement based data table UI
    `total_pages` |  number of available pages
    `count` |  number of total records
    `visible_range` |  range of displayed records
+   
+## Styling
+Custom property | Description | Default
+----------------|-------------|----------
+`--expand-cell-color` | expand cell arrow color | `--primary-color`
 
 
 ## Install
