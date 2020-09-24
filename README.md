@@ -104,7 +104,7 @@ LitElement based data table UI
 ## Styling
 Custom property | Description | Default
 ----------------|-------------|----------
-`--expand-cell-color` | expand cell arrow color | `--primary-color`
+`--expand-icon-color` | expand icon arrow color | `--primary-color`
 
 
 ## Install
