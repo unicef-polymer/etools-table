@@ -169,8 +169,9 @@ class EtoolsTable extends LitElement {
     if (this.showChildRows) {
       childRow = this.getChildRowTemplate(item);
     }
+    const rowClass = this.showRowActions() ? "row-editable" : "row-non-editable";
     return html`
-    <tr>
+    <tr class="${rowClass}">
       ${this.showChildRows ? html`<td class='expand-cell'><iron-icon expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}"></iron-icon></td>` : ''}
       ${this.columns.map((col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}">
         ${this.getItemValue(item, col, showEdit, customData)}</td>`)}
