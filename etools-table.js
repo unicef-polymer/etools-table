@@ -91,7 +91,7 @@ class EtoolsTable extends LitElement {
     this.items = [];
     this.actionsLabel = 'Actions';
     this.caption = '';
-    this.defaultPlaceholder = '-';
+    this.defaultPlaceholder = '—';
     this.extraCSS = css``;
     this.singleSort = false;
   }
