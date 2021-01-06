@@ -172,8 +172,8 @@ class EtoolsTable extends LitElement {
     const rowClass = this.showRowActions() ? "row-editable" : "row-non-editable";
     return html`
     <tr class="${rowClass}">
-      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}"></iron-icon></td>` : ''}
-      ${this.columns.map((col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}">
+      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}" tabindex="0"></iron-icon></td>` : ''}
+      ${this.columns.map((col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}" >
         ${this.getItemValue(item, col, showEdit, customData)}</td>`)}
 
       ${this.showRowActions() ? html`<td data-label="${this.actionsLabel}" class="row-actions">&nbsp;${this.getRowActionsTmpl(item)}` : ''}
@@ -202,11 +202,11 @@ class EtoolsTable extends LitElement {
     return html`
       <div class="actions">
         <paper-icon-button ?hidden="${!this.showEdit}"
-          icon="create" @tap="${() => this.triggerAction(EtoolsTableActionType.Edit, item)}"></paper-icon-button>
+          icon="create" @tap="${() => this.triggerAction(EtoolsTableActionType.Edit, item)}" tabindex="0"></paper-icon-button>
         <paper-icon-button ?hidden="${!this.showDelete}"
-          icon="delete" @tap="${() => this.triggerAction(EtoolsTableActionType.Delete, item)}"></paper-icon-button>
+          icon="delete" @tap="${() => this.triggerAction(EtoolsTableActionType.Delete, item)}" tabindex="0"></paper-icon-button>
         <paper-icon-button ?hidden="${!this.showCopy}"
-          icon="content-copy" @tap="${() => this.triggerAction(EtoolsTableActionType.Copy, item)}"></paper-icon-button>
+          icon="content-copy" @tap="${() => this.triggerAction(EtoolsTableActionType.Copy, item)}" tabindex="0"></paper-icon-button>
       </div>
     `;
   }

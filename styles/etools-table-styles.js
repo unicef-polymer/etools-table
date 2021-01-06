@@ -103,7 +103,7 @@ export const etoolsTableStyles = css`
   }
 
   .row-actions .actions {
-    visibility: hidden;
+    opacity: 0;
     position: absolute;
     right: var(--etools-table-side-padding, 16px);
     top: 0;
@@ -121,7 +121,11 @@ export const etoolsTableStyles = css`
   }
 
   tr:hover .row-actions .actions {
-    visibility: visible;
+    opacity: 1;
+  }
+
+  tr:focus-within .row-actions .actions {
+    opacity: 1;
   }
 
   .row-actions paper-icon-button {
