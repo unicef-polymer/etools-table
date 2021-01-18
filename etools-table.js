@@ -172,7 +172,7 @@ class EtoolsTable extends LitElement {
     const rowClass = this.showRowActions() ? "row-editable" : "row-non-editable";
     return html`
     <tr class="${rowClass}">
-      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}" tabindex="0"></iron-icon></td>` : ''}
+      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon @keyup="${this.callClickOnSpace}" expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}" tabindex="0"></iron-icon></td>` : ''}
       ${this.columns.map((col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}" >
         ${this.getItemValue(item, col, showEdit, customData)}</td>`)}
 
@@ -262,6 +262,15 @@ class EtoolsTable extends LitElement {
       nextRow.classList.toggle("display-none");
     }
     toggleAttributeValue(ev.target, 'icon', 'expand-less', 'expand-more');
+  }
+
+  callClickOnSpace(event) {
+    if (event.key === ' ' && !event.ctrlKey) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      event.target.click();
+    }
   }
 
   getColumnDetails(name) {
