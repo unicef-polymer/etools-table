@@ -1,7 +1,7 @@
 {
   "name": "@unicef-polymer/etools-table",
   "description": "Etools table",
-  "version": "1.1.1-rc.2",
+  "version": "1.1.1-rc.3",
   "homepage": "https://github.com/unicef-polymer/etools-table",
   "main": "etools-table.js",
   "module": "etools-table.js",
@@ -19,16 +19,16 @@
     "lodash-es": "^4.17.20"
   },
   "devDependencies": {
-    "@webcomponents/webcomponentsjs": "^2.4.3",
+    "@webcomponents/webcomponentsjs": "^2.5.0",
+    "acorn": "^8.0.5",
+    "diff": "^5.0.0",
     "eslint": "^6.5.0",
     "eslint-config-google": "^0.13.0",
-    "eslint-plugin-html": "^6.0.0",
-    "eslint-plugin-lit": "^1.2.0",
-    "wct-browser-legacy": "^1.0.2",
-    "acorn": ">=7.1.1",
-    "diff": ">=3.5.0",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-lit": "^1.3.0",
     "growl": ">=1.10.0",
-    "minimist": ">=0.2.1"
+    "minimist": ">=0.2.1",
+    "wct-browser-legacy": "^1.0.2"
   },
   "scripts": {
     "lint": "npm run lint:javascript && polymer lint && exit 0",
