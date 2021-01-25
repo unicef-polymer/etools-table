@@ -71,6 +71,13 @@ export const etoolsTableStyles = css`
     height: 16px;
   }
 
+  iron-icon[expanded]:focus {
+    outline: 0;
+    box-shadow: 0 0 10px 10px rgba(170, 165, 165, 0.3) !important;
+    background-color: rgba(170, 165, 165, 0.3);
+    border-radius: 50%;
+  }
+
   caption {
     width: 100%;
     height: 64px;
