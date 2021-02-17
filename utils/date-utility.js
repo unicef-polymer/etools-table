@@ -5,8 +5,17 @@ export function prettyDate(dateString, format, placeholder = '-') {
   const date = convertDate(dateString);
   return (!date) ? (placeholder ? placeholder : '') : _utcDate(date, format);
 }
+function getDateLib() {
+  const dateLib = window.dayjs || window.moment;
+  if (!dateLib) {
+    throw new Error('Etools-table: dayjs or moment is not loaded');
+  }
+  return dateLib;
+}
 function _utcDate(date, format) {
-  return (!date) ? '' : moment.utc(date).format(format ? format : 'D MMM YYYY');
+  const dateLib = getDateLib();
+
+  return (!date) ? '' : dateLib.utc(date).format(format ? format : 'D MMM YYYY');
 }
 export function convertDate(dateString, noZTimezoneOffset) {
   if (dateString !== '') {
@@ -34,5 +43,7 @@ export function formatDate(date, format) {
   if (!date) {
     return null;
   }
-  return moment(date).format(format);
+  const dateLib = getDateLib();
+
+  return dateLib(date).format(format);
 }
