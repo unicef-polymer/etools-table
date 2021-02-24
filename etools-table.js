@@ -83,7 +83,23 @@ class EtoolsTable extends LitElement {
 
   constructor() {
     super();
+
     this.initializeProperties();
+
+    this.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown(e) {
+    // prevent page scrolling when using table expand icon with keyboard (space key)
+    if(e.keyCode == 32 && e.path[1] && e.path[1].className === 'expand-cell') {
+      e.preventDefault();
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    this.removeEventListener("keydown", this.handleKeyDown);
   }
 
   initializeProperties() {
@@ -268,6 +284,7 @@ class EtoolsTable extends LitElement {
     if (event.key === ' ' && !event.ctrlKey) {
       // Cancel the default action, if needed
       event.preventDefault();
+
       // Trigger the button element with a click
       event.target.click();
     }
