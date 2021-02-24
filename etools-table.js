@@ -85,7 +85,6 @@ class EtoolsTable extends LitElement {
     super();
 
     this.initializeProperties();
-
     this.addEventListener('keydown', this.handleKeyDown);
   }
 
@@ -284,7 +283,6 @@ class EtoolsTable extends LitElement {
     if (event.key === ' ' && !event.ctrlKey) {
       // Cancel the default action, if needed
       event.preventDefault();
-
       // Trigger the button element with a click
       event.target.click();
     }
