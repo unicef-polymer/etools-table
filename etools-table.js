@@ -85,20 +85,6 @@ class EtoolsTable extends LitElement {
     super();
 
     this.initializeProperties();
-    this.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleKeyDown(e) {
-    // prevent page scrolling when using table expand icon with keyboard (space key)
-    if(e.keyCode == 32 && e.path[1] && e.path[1].className === 'expand-cell') {
-      e.preventDefault();
-    }
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-
-    this.removeEventListener("keydown", this.handleKeyDown);
   }
 
   initializeProperties() {
@@ -187,7 +173,7 @@ class EtoolsTable extends LitElement {
     const rowClass = this.showRowActions() ? "row-editable" : "row-non-editable";
     return html`
     <tr class="${rowClass}">
-      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon @keyup="${this.callClickOnSpace}" expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}" tabindex="0"></iron-icon></td>` : ''}
+      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon @keydown="${this.callClickOnSpace}" expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}" tabindex="0"></iron-icon></td>` : ''}
       ${this.columns.map((col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}" >
         ${this.getItemValue(item, col, showEdit, customData)}</td>`)}
 
@@ -285,6 +271,7 @@ class EtoolsTable extends LitElement {
       event.preventDefault();
       // Trigger the button element with a click
       event.target.click();
+      return false;
     }
   }
 
