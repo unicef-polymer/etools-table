@@ -83,7 +83,6 @@ class EtoolsTable extends LitElement {
 
   constructor() {
     super();
-
     this.initializeProperties();
   }
 
