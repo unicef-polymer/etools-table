@@ -74,6 +74,7 @@ LitElement based data table UI
    `items` | array of objects to be used for populating the table
    `paginator` | of type `EtoolsPaginator`, not required, will fire event `paginator-change`
    `getChildRowTemplate` | of type Function, if specified, will be called for each row with data item as param and the result will be displayed below normal row
+   `setRowActionsVisibility` | of type Function, if specified, will be called for each row with data item as param and the result will be used as settings for actions display
    `customData` | a convenient way to pass data from the page to the Column `customMethod`, this object will be the third param after data item and column key
    `extraCSS` | property of type LitElement `css` for adding custom styles
 

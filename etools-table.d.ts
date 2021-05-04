@@ -60,6 +60,7 @@ declare class EtoolsTable extends LitElement {
   paginator: object | null | undefined;
   defaultPlaceholder: string | null | undefined;
   getChildRowTemplateMethod: Function | null | undefined;
+  setRowActionsVisibility: Function | null | undefined;
   customData: object | null | undefined;
   extraCSS: CSS | null | undefined;
   singleSort: boolean | undefined;
