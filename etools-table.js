@@ -74,6 +74,7 @@ class EtoolsTable extends LitElement {
       paginator: {type: Object},
       defaultPlaceholder: {type: String},
       getChildRowTemplateMethod: {type: Function},
+      setRowActionsVisibility: {type: Function},
       customData: {type: Object},
       showChildRows: {type: Boolean},
       extraCSS: {type: Object},
@@ -199,13 +200,15 @@ class EtoolsTable extends LitElement {
   }
 
   getRowActionsTmpl(item) {
+    const rowActionsVisibility = this.setRowActionsVisibility ? this.setRowActionsVisibility(item) : {};
+    let {showEdit = this.showEdit, showDelete = this.showDelete, showCopy = this.showCopy} = rowActionsVisibility;
     return html`
       <div class="actions">
-        <paper-icon-button ?hidden="${!this.showEdit}"
+        <paper-icon-button ?hidden="${!showEdit}"
           icon="create" @tap="${() => this.triggerAction(EtoolsTableActionType.Edit, item)}" tabindex="0"></paper-icon-button>
-        <paper-icon-button ?hidden="${!this.showDelete}"
+        <paper-icon-button ?hidden="${!showDelete}"
           icon="delete" @tap="${() => this.triggerAction(EtoolsTableActionType.Delete, item)}" tabindex="0"></paper-icon-button>
-        <paper-icon-button ?hidden="${!this.showCopy}"
+        <paper-icon-button ?hidden="${!showCopy}"
           icon="content-copy" @tap="${() => this.triggerAction(EtoolsTableActionType.Copy, item)}" tabindex="0"></paper-icon-button>
       </div>
     `;
@@ -342,7 +345,7 @@ class EtoolsTable extends LitElement {
 
   // row actions
   showRowActions() {
-    return this.showDelete || this.showEdit;
+    return this.setRowActionsVisibility || this.showDelete || this.showEdit;
   }
 
   triggerAction(type, item) {
