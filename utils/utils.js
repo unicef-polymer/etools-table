@@ -1,9 +1,11 @@
 export const fireEvent = (el, eventName, eventDetail) => {
-  el.dispatchEvent(new CustomEvent(eventName, {
-    detail: eventDetail,
-    bubbles: true,
-    composed: true
-  }));
+  el.dispatchEvent(
+    new CustomEvent(eventName, {
+      detail: eventDetail,
+      bubbles: true,
+      composed: true
+    })
+  );
 };
 
 export const toggleAttributeValue = (el, attrName, attrVal1, attrVal2) => {
@@ -21,4 +23,4 @@ export const toggleAttributeValue = (el, attrName, attrVal1, attrVal2) => {
   } else {
     el.setAttribute(attrName, attrVal1);
   }
-}
+};
