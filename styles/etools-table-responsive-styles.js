@@ -6,9 +6,7 @@ export const etoolsTableResponsiveStyles = css`
     This query will take effect for any screen smaller than 760px
     and also iPads specifically.
   */
-    @media only screen and (max-width: 760px),
-    (min-device-width: 768px) and (max-device-width: 1024px) {
-
+  @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
     :host {
       padding-top: 6px;
     }
@@ -32,9 +30,10 @@ export const etoolsTableResponsiveStyles = css`
       width: 1px;
     }
     table tr:not(.child-row) td {
-      padding: .75rem 0 .75rem 36%;
+      padding: 0.75rem 0 0.75rem 36%;
     }
-    table td, table th {
+    table td,
+    table th {
       display: block !important;
       text-align: left !important;
     }
@@ -42,7 +41,7 @@ export const etoolsTableResponsiveStyles = css`
       padding: 0px 8px !important;
     }
     table tr td.pagination:before {
-      content: "";
+      content: '';
     }
     tr {
       border-top: 1px solid #ccc;
@@ -57,7 +56,7 @@ export const etoolsTableResponsiveStyles = css`
     tr:not(.child-row) td:before {
       position: absolute;
       content: attr(data-label);
-      color: var(--etools-table-secondary-text-color, rgba(0, 0, 0, .54));
+      color: var(--etools-table-secondary-text-color, rgba(0, 0, 0, 0.54));
       left: 5px;
       right: 5px;
       width: 34%;
@@ -75,7 +74,7 @@ export const etoolsTableResponsiveStyles = css`
       display: var(--child-row-responsive-display, flex);
     }
     .child-row td {
-      padding: var(--child-row-td-padding, .5rem .75rem) !important;
+      padding: var(--child-row-td-padding, 0.5rem 0.75rem) !important;
     }
   }
 `;

@@ -1,6 +1,11 @@
 import {css} from 'lit-element';
-import {layoutEndJustified, layoutHorizontal, layoutCenter, layoutVertical, layoutStart}
-  from '../styles/flex-layout-styles.js';
+import {
+  layoutEndJustified,
+  layoutHorizontal,
+  layoutCenter,
+  layoutVertical,
+  layoutStart
+} from '../styles/flex-layout-styles.js';
 
 // language=HTML
 export const etoolsPaginationStyles = css`

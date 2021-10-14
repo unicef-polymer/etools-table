@@ -1,7 +1,7 @@
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/paper-checkbox/paper-checkbox.js';
-import {customElement, LitElement, html, property, css} from 'lit-element/lit-element.js';
+import {LitElement, html, css} from 'lit-element/lit-element.js';
 
 import {etoolsTableStyles} from './styles/etools-table-styles.js';
 import {etoolsTableResponsiveStyles} from './styles/etools-table-responsive-styles.js';
@@ -28,12 +28,12 @@ export const EtoolsTableColumn = {
   customMethod: 'customMethod',
   sortMethod: 'sortMethod',
   cssClass: ''
-}
+};
 
 export const EtoolsTableChildRow = {
   rowHTML: '',
   showExpanded: false
-}
+};
 
 export const EtoolsTableColumnType = {
   Text: 'Text',
@@ -42,21 +42,20 @@ export const EtoolsTableColumnType = {
   Number: 'Number',
   Checkbox: 'Checkbox',
   Custom: 'Custom'
-}
+};
 
 export const EtoolsTableColumnSort = {
   Asc: 'asc',
   Desc: 'desc'
-}
+};
 
 export const EtoolsTableActionType = {
   Edit: 'Edit',
   Delete: 'Delete',
   Copy: 'Copy'
-}
+};
 
 class EtoolsTable extends LitElement {
-
   static get styles() {
     return [etoolsTableResponsiveStyles, etoolsTableStyles, gridLayoutStylesLit];
   }
@@ -101,7 +100,8 @@ class EtoolsTable extends LitElement {
     this.showChildRows = !!this.getChildRowTemplateMethod;
     return html`
       <style>
-        ${this.extraCSS}
+        ${this
+          .extraCSS}
         /*
          * Do not use transparent colors here, it will make the chk border darker.
          * rgba(117, 117, 117) is the equivalent of --secondary-text-color
@@ -111,16 +111,17 @@ class EtoolsTable extends LitElement {
         }
       </style>
       <table>
-        <caption ?hidden="${this.showCaption(this.caption)}">${this.caption}</caption>
+        <caption ?hidden="${this.showCaption(this.caption)}">
+          ${this.caption}
+        </caption>
         <thead>
           <tr>
-            ${this.showChildRows ? html`<th class='expand-cell'></th>` : ''}
-            ${this.columns.map(column => this.getColumnHtml(column))}
-            ${this.showRowActions() ? html`<th></th>` : ''}
+            ${this.showChildRows ? html`<th class="expand-cell"></th>` : ''}
+            ${this.columns.map((column) => this.getColumnHtml(column))} ${this.showRowActions() ? html`<th></th>` : ''}
           </tr>
         </thead>
         <tbody>
-          ${this.items.map(item => this.getRowDataHtml(item, this.showEdit, this.customData))}
+          ${this.items.map((item) => this.getRowDataHtml(item, this.showEdit, this.customData))}
           ${this.paginator ? this.paginationHtml : ''}
         </tbody>
       </table>
@@ -128,10 +129,8 @@ class EtoolsTable extends LitElement {
   }
 
   getColumnHtml(column) {
-    if (!column.hasOwnProperty('sort')) {
-      return html`
-        <th class="${this.getColumnClassList(column)}">${column.label}</th>
-      `;
+    if (!Object.prototype.hasOwnProperty.call(column, 'sort')) {
+      return html` <th class="${this.getColumnClassList(column)}">${column.label}</th> `;
     } else {
       return this.getColumnHtmlWithSort(column);
     }
@@ -141,9 +140,9 @@ class EtoolsTable extends LitElement {
     return html`
       <th class="${this.getColumnClassList(column)}" @tap="${() => this.toggleAndSortBy(column)}">
         ${column.label}
-        ${this.columnHasSort(column.sort) ? html`<iron-icon
-            .icon="${this.getSortIcon(column.sort)}">
-          </iron-icon>` : ''}
+        ${this.columnHasSort(column.sort)
+          ? html`<iron-icon .icon="${this.getSortIcon(column.sort)}"> </iron-icon>`
+          : ''}
       </th>
     `;
   }
@@ -161,7 +160,7 @@ class EtoolsTable extends LitElement {
     });
     const aHref = path.join('/');
     return isExternalLink
-      ? html`<a class="" @click="${() => window.location.href = aHref}" href="#">${item[key]}</a>`
+      ? html`<a class="" @click="${() => (window.location.href = aHref)}" href="#">${item[key]}</a>`
       : html`<a class="" href="${aHref}">${item[key]}</a>`;
   }
 
@@ -170,17 +169,31 @@ class EtoolsTable extends LitElement {
     if (this.showChildRows) {
       childRow = this.getChildRowTemplate(item);
     }
-    const rowClass = this.showRowActions() ? "row-editable" : "row-non-editable";
+    const rowClass = this.showRowActions() ? 'row-editable' : 'row-non-editable';
     return html`
-    <tr class="${rowClass}">
-      ${this.showChildRows ? html`<td class='expand-cell'><iron-icon @keydown="${this.callClickOnSpace}" expanded="${childRow.showExpanded}" @tap="${this.toggleChildRow}" icon="${this.getExpandIcon(childRow.showExpanded)}" tabindex="0"></iron-icon></td>` : ''}
-      ${this.columns.map((col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}" >
-        ${this.getItemValue(item, col, showEdit, customData)}</td>`)}
-
-      ${this.showRowActions() ? html`<td data-label="${this.actionsLabel}" class="row-actions">&nbsp;${this.getRowActionsTmpl(item)}` : ''}
-    </tr>
-    ${childRow !== undefined ? childRow.rowHTML : ''}
-  `;
+      <tr class="${rowClass}">
+        ${this.showChildRows
+          ? html`<td class="expand-cell">
+              <iron-icon
+                @keydown="${this.callClickOnSpace}"
+                expanded="${childRow.showExpanded}"
+                @tap="${this.toggleChildRow}"
+                icon="${this.getExpandIcon(childRow.showExpanded)}"
+                tabindex="0"
+              ></iron-icon>
+            </td>`
+          : ''}
+        ${this.columns.map(
+          (col) => html`<td data-label="${col.label}" class="${this.getRowDataColumnClassList(col)}">
+            ${this.getItemValue(item, col, showEdit, customData)}
+          </td>`
+        )}
+        ${this.showRowActions()
+          ? html`<td data-label="${this.actionsLabel}" class="row-actions">&nbsp;${this.getRowActionsTmpl(item)}</td>`
+          : ''}
+      </tr>
+      ${childRow !== undefined ? childRow.rowHTML : ''}
+    `;
   }
 
   getChildRowTemplate(item) {
@@ -192,32 +205,43 @@ class EtoolsTable extends LitElement {
       childRow = {};
     }
     childRow.rowHTML = html`
-    <tr class="child-row${childRow.showExpanded ? '' : ' display-none'}">
-      ${childRow.rowHTML}
-    </tr>
+      <tr class="child-row${childRow.showExpanded ? '' : ' display-none'}">
+        ${childRow.rowHTML}
+      </tr>
     `;
     return childRow;
   }
 
   getRowActionsTmpl(item) {
     const rowActionsVisibility = this.setRowActionsVisibility ? this.setRowActionsVisibility(item) : {};
-    let {showEdit = this.showEdit, showDelete = this.showDelete, showCopy = this.showCopy} = rowActionsVisibility;
+    const {showEdit = this.showEdit, showDelete = this.showDelete, showCopy = this.showCopy} = rowActionsVisibility;
     return html`
       <div class="actions">
-        <paper-icon-button ?hidden="${!showEdit}"
-          icon="create" @tap="${() => this.triggerAction(EtoolsTableActionType.Edit, item)}" tabindex="0"></paper-icon-button>
-        <paper-icon-button ?hidden="${!showDelete}"
-          icon="delete" @tap="${() => this.triggerAction(EtoolsTableActionType.Delete, item)}" tabindex="0"></paper-icon-button>
-        <paper-icon-button ?hidden="${!showCopy}"
-          icon="content-copy" @tap="${() => this.triggerAction(EtoolsTableActionType.Copy, item)}" tabindex="0"></paper-icon-button>
+        <paper-icon-button
+          ?hidden="${!showEdit}"
+          icon="create"
+          @tap="${() => this.triggerAction(EtoolsTableActionType.Edit, item)}"
+          tabindex="0"
+        ></paper-icon-button>
+        <paper-icon-button
+          ?hidden="${!showDelete}"
+          icon="delete"
+          @tap="${() => this.triggerAction(EtoolsTableActionType.Delete, item)}"
+          tabindex="0"
+        ></paper-icon-button>
+        <paper-icon-button
+          ?hidden="${!showCopy}"
+          icon="content-copy"
+          @tap="${() => this.triggerAction(EtoolsTableActionType.Copy, item)}"
+          tabindex="0"
+        ></paper-icon-button>
       </div>
     `;
   }
 
   get paginationHtml() {
-    let extraColsNo = this.showChildRows ? (this.showRowActions ? 2 : 1) : (this.showRowActions ? 1 : 0);
-    return html`
-    <tr>
+    const extraColsNo = this.showChildRows ? (this.showRowActions ? 2 : 1) : this.showRowActions ? 1 : 0;
+    return html` <tr>
       <td class="pagination" colspan="${this.columns.length + extraColsNo}">
         <etools-pagination .paginator="${this.paginator}"></etools-pagination>
       </td>
@@ -236,11 +260,11 @@ class EtoolsTable extends LitElement {
       classList.push('align-right');
     }
 
-    if (column.hasOwnProperty('sort')) {
+    if (Object.prototype.hasOwnProperty.call(column, 'sort')) {
       classList.push('sort');
     }
 
-    if(column.cssClass){
+    if (column.cssClass) {
       classList.push(column.cssClass);
     }
 
@@ -260,9 +284,9 @@ class EtoolsTable extends LitElement {
   }
 
   toggleChildRow(ev) {
-    let nextRow = ev.target.closest('tr').nextElementSibling;
+    const nextRow = ev.target.closest('tr').nextElementSibling;
     if (nextRow) {
-      nextRow.classList.toggle("display-none");
+      nextRow.classList.toggle('display-none');
     }
     toggleAttributeValue(ev.target, 'icon', 'expand-less', 'expand-more');
   }
@@ -278,7 +302,7 @@ class EtoolsTable extends LitElement {
   }
 
   getColumnDetails(name) {
-    const column = this.columns.find(c => c.name === name);
+    const column = this.columns.find((c) => c.name === name);
     if (!column) {
       throw new Error(`[EtoolsTable.getColumnDetails]: column "${name}" not found`);
     }
@@ -301,7 +325,7 @@ class EtoolsTable extends LitElement {
   }
 
   getColumnsKeys() {
-    return this.columns.map(c => c.name);
+    return this.columns.map((c) => c.name);
   }
 
   getItemValue(item, column, showEdit, customData) {
@@ -311,7 +335,9 @@ class EtoolsTable extends LitElement {
       case EtoolsTableColumnType.Date:
         return item[key]
           ? prettyDate(item[key], this.dateFormat)
-          : (column.placeholder ? column.placeholder : this.defaultPlaceholder);
+          : column.placeholder
+          ? column.placeholder
+          : this.defaultPlaceholder;
       case EtoolsTableColumnType.Link:
         return this.getLinkTmpl(column.link_tmpl, item, key, column.isExternalLink);
       case EtoolsTableColumnType.Checkbox:
@@ -326,12 +352,12 @@ class EtoolsTable extends LitElement {
   }
 
   _getCheckbox(item, key, showEdit) {
-    return html`
-      <paper-checkbox ?checked="${this._getValueByKey(item, key, '', true)}"
-        ?readonly="${!showEdit}"
-        @change="${e => this.triggerItemChanged(item, key, e.currentTarget.checked)}">
-      </paper-checkbox>`;
-
+    return html` <paper-checkbox
+      ?checked="${this._getValueByKey(item, key, '', true)}"
+      ?readonly="${!showEdit}"
+      @change="${(e) => this.triggerItemChanged(item, key, e.currentTarget.checked)}"
+    >
+    </paper-checkbox>`;
   }
 
   _getValueByKey(item, key, placeholder, ignorePlaceholder = false) {
@@ -372,10 +398,10 @@ class EtoolsTable extends LitElement {
     column.sort = this.toggleColumnSort(column.sort);
     if (this.singleSort) {
       this.columns.forEach((columnData) => {
-        if (columnData.hasOwnProperty('sort') && columnData.name !== column.name) {
-          columnData.sort = null
+        if (Object.prototype.hasOwnProperty.call(columnData, 'sort') && columnData.name !== column.name) {
+          columnData.sort = null;
         }
-      })
+      });
     }
     fireEvent(this, 'sort-change', [...this.columns]);
   }
@@ -389,6 +415,5 @@ class EtoolsTable extends LitElement {
     changedItem[field] = filedValue;
     fireEvent(this, 'item-changed', changedItem);
   }
-
 }
 window.customElements.define('etools-table', EtoolsTable);
