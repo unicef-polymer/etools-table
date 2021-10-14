@@ -1,44 +1,38 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:lit/recommended",
     "google",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:prettier/recommended"
+    // Enables eslint-plugin-prettier and eslint-config-prettier.
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
   "env": {
-    "browser": true,
-    "node": true
+    "browser": true
   },
-  "plugins": [
-    "html",
-    "lit"
-  ],
+  "plugins": ["html", "prettier"],
   "rules": {
-    "linebreak-style": "off",
     "padded-blocks": "off",
+    "linebreak-style": "off",
     "brace-style": "off",
     "new-cap": [
       "error",
       {
-        "capIsNewExceptions": [
-          "Polymer",
-          "GestureEventListeners"
-        ],
-        "capIsNewExceptionPattern": "^Etools..|..Mixin$"
+        "capIsNewExceptions": ["Polymer", "ListItemUtils", "MissingOptions", "CommonFunctionality"],
+        "capIsNewExceptionPattern": "^Etools.."
       }
     ],
     "no-var": "off",
     "require-jsdoc": "off",
     "valid-jsdoc": "off",
-    "comma-dangle": [
+    "comma-dangle": ["error", "never"],
+    "no-irregular-whitespace": [
       "error",
-      "never"
+      {
+        "skipTemplates": true
+      }
     ],
     "max-len": [
       "error",
@@ -46,25 +40,25 @@
         "code": 120
       }
     ],
-    "camelcase": "off",
+    "camelcase": [
+      "error",
+      {
+        "properties": "never"
+      }
+    ],
     "arrow-parens": [
       2,
-      "as-needed",
+      "always",
       {
         "requireForBlockBody": true
       }
-    ],
-    "indent": "off",
-    "lit/attribute-value-entities": "off",
-    "lit/no-legacy-template-syntax": "off"
+    ]
   },
   "globals": {
     "moment": true,
     "Promise": true,
     "Polymer": true,
-    "EtoolsPmpApp": true,
-    "EtoolsRequestCacheDb": true,
-    "ShadyCSS": true,
-    "Set": true
+    "EtoolsLogsMixin": true,
+    "EsmmMixins": true
   }
 }

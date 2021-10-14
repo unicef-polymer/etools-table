@@ -1,4 +1,4 @@
-import { css } from 'lit-element/lit-element.js';
+import {css} from 'lit-element/lit-element.js';
 
 // language=HTML
 export const etoolsTableStyles = css`
@@ -10,8 +10,7 @@ export const etoolsTableStyles = css`
   }
 
   a:focus {
-    border-bottom: 2px solid
-      var(--paper-input-container-focus-color, var(--primary-color));
+    border-bottom: 2px solid var(--paper-input-container-focus-color, var(--primary-color));
   }
 
   table {
@@ -191,8 +190,7 @@ export const etoolsTableStyles = css`
     color: var(--primary-color);
   }
 
-  @media only screen and (max-width: 760px),
-    (min-device-width: 768px) and (max-device-width: 1024px) {
+  @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
     paper-icon-button.icon-add {
       float: left;
     }
