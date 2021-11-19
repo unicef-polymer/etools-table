@@ -1,6 +1,5 @@
 import {customElement, LitElement, html, css, property, TemplateResult} from 'lit-element/lit-element.js';
 
-
 export interface EtoolsTableColumn {
   label: string; // column header label
   name: string; // property name from item object
@@ -42,7 +41,8 @@ export enum EtoolsTableColumnSort {
 export enum EtoolsTableActionType {
   Edit,
   Delete,
-  Copy
+  Copy,
+  View
 }
 
 /**
@@ -53,6 +53,7 @@ declare class EtoolsTable extends LitElement {
   showEdit: boolean | null | undefined;
   showDelete: boolean | null | undefined;
   showCopy: boolean | null | undefined;
+  showView: boolean | null | undefined;
   caption: string | null | undefined;
   actionsLabel: string | null | undefined;
   columns: any[] | null | undefined;
@@ -67,8 +68,7 @@ declare class EtoolsTable extends LitElement {
 }
 
 declare global {
-
   interface HTMLElementTagNameMap {
-    "etools-table": EtoolsTable;
+    'etools-table': EtoolsTable;
   }
 }

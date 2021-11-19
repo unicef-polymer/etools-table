@@ -1,0 +1,7 @@
+/node_modules
+/.idea
+/.circleci
+.prettierrc
+analysis.json
+.eslintrc.json
+.eslintignore
