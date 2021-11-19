@@ -14,15 +14,55 @@ LitElement based data table UI
 >
 </etools-table>
 
-@property({type: Array}) listColumns: EtoolsTableColumn[] = [ { label: 'Reference No.', name: 'reference_number',
-link_tmpl: `${ROOT_PATH}items/:id/details`, type: EtoolsTableColumnType.Link }, { label: 'Created Date', name:
-'created_date', type: EtoolsTableColumnType.Date, sort: EtoolsTableColumnSort.Desc }, { label: 'Partner Org', name:
-'partner_name', type: EtoolsTableColumnType.Text, sort: EtoolsTableColumnSort.Asc }, { label: 'Status', name: 'status',
-type: EtoolsTableColumnType.Text, capitalize: true }, { label: 'Assessor', name: 'assessor', type:
-EtoolsTableColumnType.Text }, { label: 'Priority', name: 'high_priority', type: EtoolsTableColumnType.Custom,
-customMethod: (item: any) => {return item.high_priority ? 'High' : '';} } ]; paginatorChange(e: CustomEvent) { const
-newPaginator = {...e.detail}; this.paginator = newPaginator; this.updateUrlListQueryParams(); } sortChange(e:
-CustomEvent) { this.sort = getSortFields(e.detail); this.updateUrlListQueryParams(); }
+@property({type: Array})
+        listColumns: EtoolsTableColumn[] = [
+          {
+            label: 'Reference No.',
+            name: 'reference_number',
+            link_tmpl: `${ROOT_PATH}items/:id/details`,
+            type: EtoolsTableColumnType.Link
+          },
+          {
+            label: 'Created Date',
+            name: 'created_date',
+            type: EtoolsTableColumnType.Date,
+            sort: EtoolsTableColumnSort.Desc
+          },
+          {
+            label: 'Partner Org',
+            name: 'partner_name',
+            type: EtoolsTableColumnType.Text,
+            sort: EtoolsTableColumnSort.Asc
+          },
+          {
+            label: 'Status',
+            name: 'status',
+            type: EtoolsTableColumnType.Text,
+            capitalize: true
+          },
+          {
+            label: 'Assessor',
+            name: 'assessor',
+            type: EtoolsTableColumnType.Text
+          },
+          {
+            label: 'Priority',
+            name: 'high_priority',
+            type: EtoolsTableColumnType.Custom,
+            customMethod: (item: any) => {return item.high_priority ? 'High' : '';}
+          }
+        ];
+
+        paginatorChange(e: CustomEvent) {
+          const newPaginator = {...e.detail};
+          this.paginator = newPaginator;
+          this.updateUrlListQueryParams();
+        }
+
+        sortChange(e: CustomEvent) {
+          this.sort = getSortFields(e.detail);
+          this.updateUrlListQueryParams();
+        }
 ```
 
 ## EtoolsTable
