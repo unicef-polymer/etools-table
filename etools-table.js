@@ -52,7 +52,8 @@ export const EtoolsTableColumnSort = {
 export const EtoolsTableActionType = {
   Edit: 'Edit',
   Delete: 'Delete',
-  Copy: 'Copy'
+  Copy: 'Copy',
+  View: 'View'
 };
 
 class EtoolsTable extends LitElement {
@@ -66,6 +67,7 @@ class EtoolsTable extends LitElement {
       showEdit: {type: Boolean, reflect: true},
       showDelete: {type: Boolean, reflect: true},
       showCopy: {type: Boolean, reflect: true},
+      showView: {type: Boolean, reflect: true},
       caption: {type: String},
       actionsLabel: {type: String},
       columns: {type: Array},
@@ -214,7 +216,12 @@ class EtoolsTable extends LitElement {
 
   getRowActionsTmpl(item) {
     const rowActionsVisibility = this.setRowActionsVisibility ? this.setRowActionsVisibility(item) : {};
-    const {showEdit = this.showEdit, showDelete = this.showDelete, showCopy = this.showCopy} = rowActionsVisibility;
+    const {
+      showEdit = this.showEdit,
+      showDelete = this.showDelete,
+      showCopy = this.showCopy,
+      showView = this.showView
+    } = rowActionsVisibility;
     return html`
       <div class="actions">
         <paper-icon-button
@@ -233,6 +240,12 @@ class EtoolsTable extends LitElement {
           ?hidden="${!showCopy}"
           icon="content-copy"
           @tap="${() => this.triggerAction(EtoolsTableActionType.Copy, item)}"
+          tabindex="0"
+        ></paper-icon-button>
+        <paper-icon-button
+          ?hidden="${!showView}"
+          icon="icons:visibility"
+          @tap="${() => this.triggerAction(EtoolsTableActionType.View, item)}"
           tabindex="0"
         ></paper-icon-button>
       </div>
@@ -371,7 +384,7 @@ class EtoolsTable extends LitElement {
 
   // row actions
   showRowActions() {
-    return this.setRowActionsVisibility || this.showDelete || this.showEdit;
+    return this.setRowActionsVisibility || this.showDelete || this.showEdit || this.showView;
   }
 
   triggerAction(type, item) {
@@ -387,6 +400,9 @@ class EtoolsTable extends LitElement {
         break;
       case EtoolsTableActionType.Copy:
         fireEvent(this, 'copy-item', item);
+        break;
+      case EtoolsTableActionType.View:
+        fireEvent(this, 'view-item', item);
         break;
     }
   }
