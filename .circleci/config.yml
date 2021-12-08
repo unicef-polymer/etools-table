@@ -4,6 +4,27 @@
 #
 version: 2
 jobs:
+  lint:
+    docker:
+      - image: cimg/node:12.22.7
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install node modules
+          command: npm ci
+      - save_cache:
+          key: cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: EsLint
+          command: npm run lint
+
   publish:
     docker:
       # specify the version you desire here
@@ -33,6 +54,10 @@ workflows:
   version: 2
   release:
     jobs:
+     - lint:
+          filters:
+            tags:
+              only: /.*/
       - publish:
           filters:
             tags:
