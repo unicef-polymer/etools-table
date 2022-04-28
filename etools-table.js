@@ -304,7 +304,7 @@ class EtoolsTable extends LitElement {
     if (nextRow) {
       nextRow.classList.toggle('display-none');
     }
-    toggleAttributeValue(ev.target, 'icon', 'expand-less', 'expand-more');
+    toggleAttributeValue(ev.target, 'icon', 'expand-more', 'chevron-right');
   }
 
   callClickOnSpace(event) {
