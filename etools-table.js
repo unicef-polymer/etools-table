@@ -111,6 +111,9 @@ class EtoolsTable extends LitElement {
         paper-checkbox[readonly] {
           --paper-checkbox-checked-color: rgba(117, 117, 117);
         }
+        table td {
+          line-height: 24px;
+        }
       </style>
       <table>
         <caption ?hidden="${this.showCaption(this.caption)}">
@@ -293,7 +296,7 @@ class EtoolsTable extends LitElement {
   }
 
   getExpandIcon(expanded) {
-    return expanded === true ? 'expand-less' : 'expand-more';
+    return expanded === true ? 'expand-more' : 'chevron-right';
   }
 
   toggleChildRow(ev) {
@@ -301,7 +304,7 @@ class EtoolsTable extends LitElement {
     if (nextRow) {
       nextRow.classList.toggle('display-none');
     }
-    toggleAttributeValue(ev.target, 'icon', 'expand-less', 'expand-more');
+    toggleAttributeValue(ev.target, 'icon', 'expand-more', 'chevron-right');
   }
 
   callClickOnSpace(event) {
