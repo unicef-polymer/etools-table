@@ -5,6 +5,7 @@ import '@polymer/paper-item/paper-item.js';
 import {LitElement, html} from 'lit-element/lit-element.js';
 import {etoolsPaginationStyles} from './etools-pagination-style.js';
 import {fireEvent} from '../utils/utils';
+import {getTranslation} from '../utils/translate.js';
 
 // #region Paginator methods
 export const defaultPaginator = {
@@ -79,7 +80,8 @@ export class EtoolsPagination extends LitElement {
   static get properties() {
     return {
       paginator: {type: Object},
-      pageSizeOptions: {type: Array}
+      pageSizeOptions: {type: Array},
+      language: {type: String}
     };
   }
 
@@ -88,14 +90,32 @@ export class EtoolsPagination extends LitElement {
     this.initializeProperties();
   }
 
+  handleLanguageChange(e) {
+    this.language = e.detail.language;
+  }
+
   initializeProperties() {
     this.pageSizeOptions = [5, 10, 20, 50];
+    if (!this.language) {
+      this.language = window.localStorage.defaultLanguage || 'en';
+    }
+    this.handleLanguageChange = this.handleLanguageChange.bind(this);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('language-changed', this.handleLanguageChange);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('language-changed', this.handleLanguageChange);
   }
 
   render() {
     return html`
       <span class="pagination-item">
-        <span id="rows">Rows per page:</span>
+        <span id="rows">${getTranslation(this.language, 'ROWS_PER_PAGE')}</span>
         <paper-dropdown-menu
           vertical-align="bottom"
           horizontal-align="left"
@@ -110,7 +130,8 @@ export class EtoolsPagination extends LitElement {
           </paper-listbox>
         </paper-dropdown-menu>
         <span id="range">
-          ${this.paginator.visible_range[0]}-${this.paginator.visible_range[1]} of ${this.paginator.count}
+          ${this.paginator.visible_range[0]}-${this.paginator.visible_range[1]} ${getTranslation(this.language, 'OF')}
+          ${this.paginator.count}
         </span>
       </span>
 

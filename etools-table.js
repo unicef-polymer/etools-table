@@ -79,7 +79,8 @@ class EtoolsTable extends LitElement {
       customData: {type: Object},
       showChildRows: {type: Boolean},
       extraCSS: {type: Object},
-      singleSort: {type: Boolean, value: false}
+      singleSort: {type: Boolean, value: false},
+      language: {type: String}
     };
   }
 
@@ -96,6 +97,24 @@ class EtoolsTable extends LitElement {
     this.defaultPlaceholder = '—';
     this.extraCSS = css``;
     this.singleSort = false;
+    if (!this.language) {
+      this.language = window.localStorage.defaultLanguage || 'en';
+    }
+    this.handleLanguageChange = this.handleLanguageChange.bind(this);
+  }
+
+  handleLanguageChange(e) {
+    this.language = e.detail.language;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('language-changed', this.handleLanguageChange);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('language-changed', this.handleLanguageChange);
   }
 
   render() {
@@ -259,7 +278,7 @@ class EtoolsTable extends LitElement {
     const extraColsNo = this.showChildRows ? (this.showRowActions ? 2 : 1) : this.showRowActions ? 1 : 0;
     return html` <tr>
       <td class="pagination" colspan="${this.columns.length + extraColsNo}">
-        <etools-pagination .paginator="${this.paginator}"></etools-pagination>
+        <etools-pagination .paginator="${this.paginator}" .language="${this.language}"></etools-pagination>
       </td>
     </tr>`;
   }
