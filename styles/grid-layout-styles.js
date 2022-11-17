@@ -1,5 +1,4 @@
 import {css} from 'lit-element/lit-element.js';
-import {layoutHorizontal, layoutVertical, layoutFlex, layoutWrap} from './flex-layout-styles.js';
 
 // language=HTML
 export const gridLayoutStylesLit = css`
@@ -13,16 +12,18 @@ export const gridLayoutStylesLit = css`
   }
 
   .layout-horizontal {
-    ${layoutHorizontal}
+    display: flex;
+    flex-direction: row;
   }
 
   .layout-vertical,
   .col.layout-vertical {
-    ${layoutVertical}
+    display: flex;
+    flex-direction: column;
   }
 
   .layout-wrap {
-    ${layoutWrap};
+    flex-wrap: wrap;
   }
 
   .row-padding {
@@ -48,16 +49,18 @@ export const gridLayoutStylesLit = css`
   }
 
   .row-h {
-    ${layoutHorizontal}
+    display: flex;
   }
 
   .row-v {
-    ${layoutVertical};
+    display: flex;
+    flex-direction: column;
   }
 
   .flex-c {
     /* flex container */
-    ${layoutFlex}
+    flex: 1;
+    flex-basis: 0.000000001px;
   }
 
   .row-h,
@@ -106,7 +109,7 @@ export const gridLayoutStylesLit = css`
   }
 
   .right-align {
-    ${layoutHorizontal}
+    display: flex;
     justify-content: flex-end;
     align-items: center;
     text-align: right;
@@ -122,7 +125,7 @@ export const gridLayoutStylesLit = css`
   }
 
   .col {
-    ${layoutHorizontal}
+    display: flex;
     box-sizing: border-box;
   }
 

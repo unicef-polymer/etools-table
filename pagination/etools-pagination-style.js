@@ -1,18 +1,12 @@
 import {css} from 'lit-element';
-import {
-  layoutEndJustified,
-  layoutHorizontal,
-  layoutCenter,
-  layoutVertical,
-  layoutStart
-} from '../styles/flex-layout-styles.js';
 
 // language=HTML
 export const etoolsPaginationStyles = css`
     :host {
-      ${layoutHorizontal}
-      ${layoutCenter}
-      ${layoutEndJustified}
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
       font-size: 12px;
       color: var(--secondary-text-color, rgba(0, 0, 0, 0.54));
     }
@@ -56,7 +50,8 @@ export const etoolsPaginationStyles = css`
         font-size: 12px !important;
         height: 24px;
         /* For IE below */
-        ${layoutHorizontal}
+        display: flex;
+        flex-direction: row;
         align-items: strech;
         max-width: 24px;
       };
@@ -67,16 +62,17 @@ export const etoolsPaginationStyles = css`
     }
 
     .pagination-item {
-      ${layoutHorizontal}
-      ${layoutCenter}
+      display: flex;
+      align-items: center;
     }
 
     /* Mobile view CSS */
     :host([low-resolution-layout]){
       padding: 8px 0;
       height: auto;
-      ${layoutVertical}
-      ${layoutStart}
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     :host([low-resolution-layout]) #range {
