@@ -24,7 +24,7 @@ const translations = {
     OF: 'de'
   },
   ar: {
-    ROWS_PER_PAGE: 'دد الصفوف في الصفحة:', // The browser moves the collon to the left
+    ROWS_PER_PAGE: 'دد الصفوف في الصفحة:', // The browser moves the colon to the left
     OF: 'من'
   }
 };
