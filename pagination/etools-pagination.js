@@ -83,6 +83,9 @@ export class EtoolsPagination extends LitElement {
       pageSizeOptions: {type: Array},
       language: {
         type: String
+      },
+      direction: {
+        type: String
       }
     };
   }
@@ -94,8 +97,10 @@ export class EtoolsPagination extends LitElement {
 
   initializeProperties() {
     this.pageSizeOptions = [5, 10, 20, 50];
+    this.direction = 'ltr';
     if (!this.language) {
       this.language = window.localStorage.defaultLanguage || 'en';
+      this.direction = this.language === 'ar' ? 'rtl' : 'ltr';
     }
   }
 
@@ -124,25 +129,25 @@ export class EtoolsPagination extends LitElement {
 
       <span class="pagination-item pagination-btns">
         <paper-icon-button
-          icon="first-page"
+          icon="${this.direction === 'ltr' ? 'first-page' : 'last-page'}"
           @tap="${this.goToFirstPage}"
           ?disabled="${this.paginator.page === 1}"
         ></paper-icon-button>
 
         <paper-icon-button
-          icon="chevron-left"
+          icon="${this.direction === 'ltr' ? 'chevron-left' : 'chevron-right'}"
           @tap="${this.pageLeft}"
           ?disabled="${this.paginator.page === 1}"
         ></paper-icon-button>
 
         <paper-icon-button
-          icon="chevron-right"
+          icon="${this.direction === 'ltr' ? 'chevron-right' : 'chevron-left'}"
           @tap="${this.pageRight}"
           ?disabled="${this.paginator.page === this.paginator.total_pages}"
         ></paper-icon-button>
 
         <paper-icon-button
-          icon="last-page"
+          icon="${this.direction === 'ltr' ? 'last-page' : 'first-page'}"
           @tap="${this.goToLastPage}"
           ?disabled="${this.paginator.page === this.paginator.total_pages}"
         ></paper-icon-button>
@@ -162,6 +167,7 @@ export class EtoolsPagination extends LitElement {
 
   handleLanguageChange(e) {
     this.language = e.detail.language;
+    this.direction = this.language === 'ar' ? 'rtl' : 'ltr';
   }
 
   goToFirstPage() {
