@@ -33,7 +33,7 @@ export const etoolsPaginationStyles = css`
     }
 
     #rows {
-      margin-right: 24px;
+      margin-inline-end: 24px;
     }
 
     #range {
