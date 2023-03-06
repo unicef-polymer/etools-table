@@ -90,16 +90,16 @@ export const etoolsTableStyles = css`
 
   table tr th:first-child,
   table tr td:first-child {
-    padding-left: var(--etools-table-side-padding, 24px);
+    padding-inline-start: var(--etools-table-side-padding, 24px);
   }
 
   table tr th:last-of-type,
   table tr td:last-of-type {
-    padding-right: var(--etools-table-side-padding, 24px);
+    padding-inline-end: var(--etools-table-side-padding, 24px);
   }
 
   table tr td.pagination {
-    padding-right: 16px;
+    padding-inline-end: 16px;
   }
 
   /* action styles */

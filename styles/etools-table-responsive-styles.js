@@ -30,7 +30,8 @@ export const etoolsTableResponsiveStyles = css`
       width: 1px;
     }
     table tr:not(.child-row) td {
-      padding: 0.75rem 0 0.75rem 36%;
+      padding: 0.75rem 0;
+      padding-inline-start: 36%;
     }
     table td,
     table th {
@@ -51,7 +52,7 @@ export const etoolsTableResponsiveStyles = css`
       border: none !important;
       line-height: inherit;
       position: relative;
-      padding-left: 36% !important;
+      padding-inline-start: 36% !important;
     }
     tr:not(.child-row) td:before {
       position: absolute;
