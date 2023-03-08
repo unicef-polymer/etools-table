@@ -58,8 +58,8 @@ export const etoolsTableResponsiveStyles = css`
       position: absolute;
       content: attr(data-label);
       color: var(--etools-table-secondary-text-color, rgba(0, 0, 0, 0.54));
-      left: 5px;
-      right: 5px;
+      inset-inline-start: 5px;
+      inset-inline-end: 5px;
       width: 34%;
       white-space: nowrap;
       overflow: hidden;

@@ -111,7 +111,7 @@ export const etoolsTableStyles = css`
   .row-actions .actions {
     opacity: 0;
     position: absolute;
-    right: var(--etools-table-side-padding, 16px);
+    inset-inline-end: var(--etools-table-side-padding, 16px);
     top: 0;
     bottom: 0;
     -ms-flex-direction: row;
@@ -151,8 +151,8 @@ export const etoolsTableStyles = css`
   }
 
   .expand-cell {
-    padding-left: 5px !important;
-    padding-right: 5px !important;
+    padding-inline-start: 5px !important;
+    padding-inline-end: 5px !important;
     width: 20px;
     color: var(--expand-icon-color, --primary-color);
     cursor: pointer;
