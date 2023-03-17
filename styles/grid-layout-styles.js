@@ -112,7 +112,7 @@ export const gridLayoutStylesLit = css`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    text-align: right;
+    text-align: end;
   }
 
   .bottom-aligned {

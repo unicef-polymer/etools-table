@@ -29,7 +29,7 @@ export const etoolsTableStyles = css`
     padding: 0.75rem;
     vertical-align: top;
     display: table-cell;
-    text-align: left;
+    text-align: start;
   }
 
   table th {
@@ -38,7 +38,7 @@ export const etoolsTableStyles = css`
 
   table td.align-right,
   table th.align-right {
-    text-align: right;
+    text-align: end;
   }
 
   table td {
@@ -82,7 +82,7 @@ export const etoolsTableStyles = css`
     height: 64px;
     line-height: 64px;
     font-size: 20px;
-    text-align: left;
+    text-align: start;
     color: var(--etools-table-text-color, #2b2b2b);
     padding: 0 var(--etools-table-side-padding, 24px);
     box-sizing: border-box;
@@ -156,6 +156,10 @@ export const etoolsTableStyles = css`
     width: 20px;
     color: var(--expand-icon-color, --primary-color);
     cursor: pointer;
+  }
+
+  :host-context([dir='rtl']) .expand-cell [icon='chevron-right'] {
+    transform: rotate(180deg);
   }
 
   .child-row,
