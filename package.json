@@ -1,7 +1,7 @@
 {
   "name": "@unicef-polymer/etools-table",
   "description": "Etools table",
-  "version": "1.4.2-rc2",
+  "version": "1.4.2",
   "homepage": "https://github.com/unicef-polymer/etools-table",
   "main": "etools-table.js",
   "module": "etools-table.js",
@@ -28,7 +28,7 @@
     "eslint-plugin-html": "^6.1.1",
     "eslint-plugin-prettier": "^3.2.0",
     "growl": ">=1.10.0",
-    "minimist": ">=0.2.1",
+    "minimist": ">=1.2.6",
     "prettier": "^2.3.2",
     "wct-browser-legacy": "^1.0.2",
     "glob-parent": ">=5.1.2"
