@@ -76,11 +76,12 @@ export const etoolsPaginationStyles = css`
     }
 
     :host([low-resolution-layout]) #range {
-      margin: 0 0 0 24px;
+      margin: 0;
+      margin-inline-start: 24px;
     }
 
     :host([low-resolution-layout]) .pagination-btns {
-      margin-left: -12px;
+      margin-inline-start: -12px;
     }
 
     @media (max-width: 576px) {
