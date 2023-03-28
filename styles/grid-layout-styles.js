@@ -1,5 +1,4 @@
 import {css} from 'lit-element/lit-element.js';
-import {layoutHorizontal, layoutVertical, layoutFlex, layoutWrap} from './flex-layout-styles.js';
 
 // language=HTML
 export const gridLayoutStylesLit = css`
@@ -13,16 +12,18 @@ export const gridLayoutStylesLit = css`
   }
 
   .layout-horizontal {
-    ${layoutHorizontal}
+    display: flex;
+    flex-direction: row;
   }
 
   .layout-vertical,
   .col.layout-vertical {
-    ${layoutVertical}
+    display: flex;
+    flex-direction: column;
   }
 
   .layout-wrap {
-    ${layoutWrap};
+    flex-wrap: wrap;
   }
 
   .row-padding {
@@ -30,8 +31,8 @@ export const gridLayoutStylesLit = css`
   }
 
   .row-padding-h {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-inline-start: 24px;
+    padding-inline-end: 24px;
   }
 
   .row-padding-v {
@@ -48,16 +49,18 @@ export const gridLayoutStylesLit = css`
   }
 
   .row-h {
-    ${layoutHorizontal}
+    display: flex;
   }
 
   .row-v {
-    ${layoutVertical};
+    display: flex;
+    flex-direction: column;
   }
 
   .flex-c {
     /* flex container */
-    ${layoutFlex}
+    flex: 1;
+    flex-basis: 0.000000001px;
   }
 
   .row-h,
@@ -106,10 +109,10 @@ export const gridLayoutStylesLit = css`
   }
 
   .right-align {
-    ${layoutHorizontal}
+    display: flex;
     justify-content: flex-end;
     align-items: center;
-    text-align: right;
+    text-align: end;
   }
 
   .bottom-aligned {
@@ -122,12 +125,12 @@ export const gridLayoutStylesLit = css`
   }
 
   .col {
-    ${layoutHorizontal}
+    display: flex;
     box-sizing: border-box;
   }
 
   .col:not(:first-of-type) {
-    padding-left: 24px;
+    padding-inline-start: 24px;
   }
 
   .col-1 {

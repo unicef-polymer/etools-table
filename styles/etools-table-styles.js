@@ -29,7 +29,7 @@ export const etoolsTableStyles = css`
     padding: 0.75rem;
     vertical-align: top;
     display: table-cell;
-    text-align: left;
+    text-align: start;
   }
 
   table th {
@@ -38,7 +38,7 @@ export const etoolsTableStyles = css`
 
   table td.align-right,
   table th.align-right {
-    text-align: right;
+    text-align: end;
   }
 
   table td {
@@ -82,7 +82,7 @@ export const etoolsTableStyles = css`
     height: 64px;
     line-height: 64px;
     font-size: 20px;
-    text-align: left;
+    text-align: start;
     color: var(--etools-table-text-color, #2b2b2b);
     padding: 0 var(--etools-table-side-padding, 24px);
     box-sizing: border-box;
@@ -90,16 +90,16 @@ export const etoolsTableStyles = css`
 
   table tr th:first-child,
   table tr td:first-child {
-    padding-left: var(--etools-table-side-padding, 24px);
+    padding-inline-start: var(--etools-table-side-padding, 24px);
   }
 
   table tr th:last-of-type,
   table tr td:last-of-type {
-    padding-right: var(--etools-table-side-padding, 24px);
+    padding-inline-end: var(--etools-table-side-padding, 24px);
   }
 
   table tr td.pagination {
-    padding-right: 16px;
+    padding-inline-end: 16px;
   }
 
   /* action styles */
@@ -111,7 +111,7 @@ export const etoolsTableStyles = css`
   .row-actions .actions {
     opacity: 0;
     position: absolute;
-    right: var(--etools-table-side-padding, 16px);
+    inset-inline-end: var(--etools-table-side-padding, 16px);
     top: 0;
     bottom: 0;
     -ms-flex-direction: row;
@@ -151,11 +151,15 @@ export const etoolsTableStyles = css`
   }
 
   .expand-cell {
-    padding-left: 5px !important;
-    padding-right: 5px !important;
+    padding-inline-start: 5px !important;
+    padding-inline-end: 5px !important;
     width: 20px;
     color: var(--expand-icon-color, --primary-color);
     cursor: pointer;
+  }
+
+  :host-context([dir='rtl']) .expand-cell [icon='chevron-right'] {
+    transform: rotate(180deg);
   }
 
   .child-row,

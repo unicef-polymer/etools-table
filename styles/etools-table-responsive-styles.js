@@ -30,12 +30,13 @@ export const etoolsTableResponsiveStyles = css`
       width: 1px;
     }
     table tr:not(.child-row) td {
-      padding: 0.75rem 0 0.75rem 36%;
+      padding: 0.75rem 0;
+      padding-inline-start: 36%;
     }
     table td,
     table th {
       display: block !important;
-      text-align: left !important;
+      text-align: start !important;
     }
     table tr td.pagination {
       padding: 0px 8px !important;
@@ -51,14 +52,14 @@ export const etoolsTableResponsiveStyles = css`
       border: none !important;
       line-height: inherit;
       position: relative;
-      padding-left: 36% !important;
+      padding-inline-start: 36% !important;
     }
     tr:not(.child-row) td:before {
       position: absolute;
       content: attr(data-label);
       color: var(--etools-table-secondary-text-color, rgba(0, 0, 0, 0.54));
-      left: 5px;
-      right: 5px;
+      inset-inline-start: 5px;
+      inset-inline-end: 5px;
       width: 34%;
       white-space: nowrap;
       overflow: hidden;
