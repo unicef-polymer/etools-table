@@ -99,7 +99,7 @@ export class EtoolsPagination extends LitElement {
     this.pageSizeOptions = [5, 10, 20, 50];
     this.direction = 'ltr';
     if (!this.language) {
-      this.language = window.localStorage.defaultLanguage || 'en';
+      this.language = window.EtoolsLanguage || 'en';
       this.direction = this.language === 'ar' ? 'rtl' : 'ltr';
     }
   }
