@@ -92,10 +92,10 @@ export class EtoolsTable extends LitElement {
   defaultPlaceholder = '—';
 
   @property({type: Function})
-  getChildRowTemplateMethod: ((item: any) => void) | undefined = undefined;
+  getChildRowTemplateMethod: ((item: any) => any) | undefined = undefined;
 
   @property({type: Function})
-  setRowActionsVisibility: ((item: any) => void) | undefined = undefined;
+  setRowActionsVisibility: ((item: any) => any) | undefined = undefined;
 
   @property({type: Object})
   customData: any = {};
