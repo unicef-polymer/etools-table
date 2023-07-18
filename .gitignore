@@ -1,2 +1,11 @@
-node_modules/
-.idea
+/bower_components
+/node_modules
+/.idea
+/.circleci
+/.vscode
+/src_ts
+/demo
+/test
+.prettierrc
+analysis.json
+.eslintrc.json
