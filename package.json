@@ -1,7 +1,7 @@
 {
   "name": "@unicef-polymer/etools-table",
   "description": "Etools table",
-  "version": "2.0.1",
+  "version": "3.0.0-rc.1",
   "homepage": "https://github.com/unicef-polymer/etools-table",
   "main": "./src/etools-table.js",
   "module": "./src/etools-table.js",
@@ -52,6 +52,7 @@
     "eslint-config-google": "^0.13.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-lit": "^1.8.3",
     "eslint-plugin-prettier": "^3.2.0",
     "glob-parent": ">=5.1.2",
     "minimist": ">=0.2.1",
@@ -61,7 +62,7 @@
   "scripts": {
     "tsToJs": "tsc",
     "watch": "tsc --watch",
-    "lint": "eslint . --ext js,html --ignore-path .gitignore",
+    "lint": "eslint . --ext ts,html --ignore-path .gitignore",
     "format": "eslint --ext .ts . --fix --ignore-path .gitignore",
     "publishPackage": "npm run tsToJs && npm publish",
     "prepublishOnly": "npm run tsToJs"
