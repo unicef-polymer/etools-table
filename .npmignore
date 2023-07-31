@@ -1,6 +1,7 @@
 /node_modules
 /.idea
 /.circleci
+/src_ts
 .prettierrc
 analysis.json
 .eslintrc.json

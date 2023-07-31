@@ -1,43 +1,19 @@
 {
   "name": "@unicef-polymer/etools-table",
   "description": "Etools table",
-  "version": "3.0.0-rc.1",
+  "version": "3.0.0-rc.2",
   "homepage": "https://github.com/unicef-polymer/etools-table",
-  "main": "./src/etools-table.js",
-  "module": "./src/etools-table.js",
+  "main": "./dist/etools-table.js",
+  "module": "./dist/etools-table.js",
   "files": [
-    "src"
+    "dist"
   ],
-  "exports": {
-    "./etools-table": {
-      "types": "./src/etools-table.d.ts",
-      "default": "./src/etools-table.js"
-    },
-    "./pagination/etools-pagination": {
-      "types": "./src/pagination/etools-pagination.d.ts",
-      "default": "./src/pagination/etools-pagination.js"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "pagination/etools-pagination": [
-        "./src/pagination/etools-pagination.d.ts"
-      ],
-      "etools-table": [
-        "./src/etools-table.d.ts"
-      ]
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/unicef-polymer/etools-table.git"
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@polymer/iron-icons": "^3.0.1",
-    "@polymer/paper-checkbox": "^3.1.0",
-    "@polymer/paper-icon-button": "^3.0.2",
-    "@polymer/polymer": "^3.4.1",
     "@shoelace-style/shoelace": "^2.5.2",
     "lit-element": "^2.5.1",
     "lit-html": "^2.7.5",
